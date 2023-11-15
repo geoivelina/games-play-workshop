@@ -1,0 +1,18 @@
+{
+    "2c514a15-51f2-484c-b8d4-198cccb1ff55": {
+        "title": "SomeGame",
+        "category": "Fantasy",
+        "maxLevel": "120",
+        "imageUrl": "https://tse2.mm.bing.net/th?id=OIP.UfrStO70pDJsfW9PrDMtwQHaEo&pid=Api",
+        "summary": "Some Fantasy Game",
+        "_id": "2c514a15-51f2-484c-b8d4-198cccb1ff55"
+    },
+    "6c9afb1a-d56d-4dea-a030-f0794368aab8": {
+        "title": "ActionGame",
+        "category": "Action",
+        "maxLevel": "90",
+        "imageUrl": "https://tse1.mm.bing.net/th?id=OIP.wQdOvu3mVfrZQ2jvvZekCAHaEK&pid=Api",
+        "summary": "Some Action Game",
+        "_id": "6c9afb1a-d56d-4dea-a030-f0794368aab8"
+    }
+}
