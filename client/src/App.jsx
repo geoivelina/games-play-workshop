@@ -1,11 +1,11 @@
+import Header from "./components/Header/Header";
 
 function App() {
-
-  return (
-    <>
-      <h1>Games Play App</h1>
-    </>
-  )
+    return (
+        <div id="box">
+            <Header />
+        </div>
+    );
 }
 
-export default App
+export default App;
