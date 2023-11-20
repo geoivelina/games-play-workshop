@@ -4,21 +4,28 @@ export const request = async (method, url, data) => {
         method,
     });
 
-    if (!res.ok) {
-        throw new Error("Something went wrog");
+    if (!res.status == 204) {
+        return {};
     }
 
     const result = await res.json();
+
+    if (!res.ok) {
+        throw result;
+    }
+
     return result;
 };
 
 const buildOptions = (data) => {
     const options = {};
+
     if (data) {
         options.body = JSON.stringify(data);
         options.headers = {
             "content-type": "application/json",
         };
     }
+
     return options;
 };

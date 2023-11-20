@@ -1,7 +1,33 @@
+import { useState } from "react";
 import * as gameService from "../../services/gameService";
 import { useNavigate } from "react-router-dom";
 
+const FORM_KEYS = {
+    title: "title",
+    category: "category",
+    maxLevel: "maxLevel",
+    imageUrl: "imageUrl",
+    summary: "summary",
+};
+
+const initialFormState = {
+    [FORM_KEYS.title]: "",
+    [FORM_KEYS.category]: "",
+    [FORM_KEYS.maxLevel]: "",
+    [FORM_KEYS.imageUrl]: "",
+    [FORM_KEYS.sum]: "",
+}
+
 export default function GameCreate() {
+    const [formValues, setFormValues] = useState(initialFormState);
+
+    const changeChandler = (e) => {
+        setFormValues(state => ({
+            ...state, 
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     const navigate = useNavigate();
     const createGameSubmitHandler = async (e) => {
         e.preventDefault();
@@ -25,37 +51,49 @@ export default function GameCreate() {
                     <input
                         type="text"
                         id="title"
-                        name="title"
+                        value={formValues.title}
+                        name={FORM_KEYS.title}
                         placeholder="Enter game title..."
+                        onChange={changeChandler}
                     />
 
                     <label htmlFor="category">Category:</label>
                     <input
                         type="text"
                         id="category"
-                        name="category"
-                        placeholder="Enter game category..."
+                        value={formValues.category}
+                        name={FORM_KEYS.category}
+                        onChange={changeChandler}
                     />
 
                     <label htmlFor="levels">MaxLevel:</label>
                     <input
                         type="number"
                         id="maxLevel"
-                        name="maxLevel"
+                        value={formValues.maxLevel}
+                        name={FORM_KEYS.maxLevel}
                         min="1"
                         placeholder="1"
+                        onChange={changeChandler}
                     />
 
                     <label htmlFor="game-img">Image:</label>
                     <input
                         type="text"
                         id="imageUrl"
-                        name="imageUrl"
+                        value={formValues.imageUrl}
+                        name={FORM_KEYS.imageUrl}
                         placeholder="Upload a photo..."
+                        onChange={changeChandler}
                     />
 
                     <label htmlFor="summary">Summary:</label>
-                    <textarea name="summary" id="summary"></textarea>
+                    <textarea
+                        name={FORM_KEYS.summary}
+                        id="summary"
+                        value={formValues.summary}
+                        onChange={changeChandler}
+                    ></textarea>
                     <input
                         className="btn submit"
                         type="submit"
