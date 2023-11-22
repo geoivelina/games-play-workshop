@@ -1,11 +1,10 @@
 import { request } from "../lib/request";
 
-const baseUrl = "http://localhost:3030/jsonstore/comments";
+const baseUrl = "http://localhost:3030/data/comments";
 
-export const create = async (gameId, userName, text) => {
+export const create = async (gameId, text) => {
     const newComment = await request("POST", baseUrl, {
         gameId,
-        userName,
         text,
     });
     return newComment;
@@ -14,9 +13,9 @@ export const create = async (gameId, userName, text) => {
 export const getAllCommentsByGameId = async (gameId) => {
     const query = new URLSearchParams({
         where: `gameId="${gameId}"`,
+        load:`owner=_ownerId:users`
     });
-    const result = await request("GET", `${baseUrl}`);
-    //TODO migrate to collection service
+    const result = await request("GET", `${baseUrl}?${query}`);
 
-    return Object.values(result).filter((Comment) => Comment.gameId === gameId);
+    return result;
 };
