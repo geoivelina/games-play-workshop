@@ -4,7 +4,7 @@ export const request = async (method, url, data) => {
         method,
     });
 
-    if (!res.status == 204) {
+    if (res.status === 204) {
         return {};
     }
 
@@ -24,6 +24,15 @@ const buildOptions = (data) => {
         options.body = JSON.stringify(data);
         options.headers = {
             "content-type": "application/json",
+        };
+    }
+
+    const token = localStorage.getItem("accessToken");
+    
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            "X-Authorization": token,
         };
     }
 

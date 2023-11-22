@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as gameService from "../../services/gameService";
 import { useNavigate } from "react-router-dom";
+import Path from "../../paths";
 
 const FORM_KEYS = {
     title: "title",
@@ -37,7 +38,7 @@ export default function GameCreate() {
         try {
             await gameService.create(gameData);
 
-            navigate("/games");
+            navigate(Path.Catalog);
         } catch (error) {
             console.log(error);
         }
