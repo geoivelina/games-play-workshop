@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -11,65 +10,12 @@ import Register from "./components/Register/Register";
 import GameDetails from "./components/GameDetails/GameDetails";
 
 import { AuthProvider } from "./contexts/AuthContext";
-import * as authService from "./services/authService";
 import Path from "./paths";
 
 function App() {
-    const navigate = useNavigate();
-    const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("accessToken");
-
-        return {};
-    });
-
-    const onLoginSubmit = async (data) => {
-        try {
-            const result = await authService.login(data);
-            setAuth(result);
-
-            localStorage.setItem("accessToken", result.accessToken);
-
-            navigate(Path.Home);
-        } catch (error) {
-            console.log(`Something went wrong in APP: ${error.message}`);
-        }
-    };
-
-    const onRegisterSubmit = async (values) => {
-        const { confirmPassword, ...registerData } = values;
-
-        if (confirmPassword !== registerData.password) {
-            return;
-        }
-
-        try {
-            const result = await authService.register(registerData);
-            localStorage.setItem("accessToken", result.accessToken);
-            setAuth(result);
-
-            navigate("/login");
-        } catch (error) {
-            console.log(`Something went wrong.`);
-        }
-    };
-
-    const onLogout = () => {
-        localStorage.removeItem("accessToken");
-        setAuth({});
-    };
-
-    const context = {
-        onLoginSubmit,
-        onRegisterSubmit,
-        onLogout,
-        userId: auth._id,
-        token: auth.accessToken,
-        userEmail: auth.email,
-        isAuthenticated: !!auth.accessToken,
-    };
-
+ 
     return (
-        <AuthProvider value={context}>
+        <AuthProvider>
             <div id="box">
                 <Header />
 

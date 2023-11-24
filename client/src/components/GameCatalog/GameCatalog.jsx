@@ -5,14 +5,19 @@ import GameCatalogItem from "./gameCatalogItem/gameCatalogItem";
 export default function GameCatalog() {
     const [games, setGames] = useState([]);
     useEffect(() => {
-        gameService.getAllGames().then((result) => setGames(result));
+        gameService
+            .getAllGames()
+            .then((result) => setGames(result))
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     return (
         <section id="catalog-page">
             <h1>All Games</h1>
 
-            {games.map(game => (
+            {games.map((game) => (
                 <GameCatalogItem key={game._id} {...game} />
             ))}
 
