@@ -10,7 +10,7 @@ import Logout from "./components/Logout/Logout";
 import Register from "./components/Register/Register";
 import GameDetails from "./components/GameDetails/GameDetails";
 
-import { AuthContext } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import * as authService from "./services/authService";
 import Path from "./paths";
 
@@ -69,7 +69,7 @@ function App() {
     };
 
     return (
-        <AuthContext.Provider value={context}>
+        <AuthProvider value={context}>
             <div id="box">
                 <Header />
 
@@ -83,7 +83,7 @@ function App() {
                     <Route path={Path.GameDetails} element={<GameDetails />} />
                 </Routes>
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 
